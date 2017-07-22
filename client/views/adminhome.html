@@ -1,0 +1,79 @@
+<style>
+ th, tr,td{
+   text-align: center;
+   font-size:20px;
+padding: 10px;
+
+
+},
+
+</style>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <span style="font-size:23px"></b><center><u><i>Advance Booking Page</i></u><center></b></span>
+
+<center><p style="margin:50px"><strong style="font-size:25px;  "  ng-if="client1.length==0" class="label label-info">
+  <b>
+    <u>No Data For Advance Booking</u>
+  </b>
+</strong>
+</p>
+</center>
+<br>
+        <div  ng-if="client1.length>0" >
+
+
+          <form name="myform" >
+
+            <table class="table-striped;label label-info ">
+   <thead>
+     <tr>
+       <th style="color: white">Customer Name</th>
+       <th style="color: white">Customer Contact Number</th>
+       <th style="color: white">PickUp Date and Time </th>
+       <th style="color: white">PickUp Location</th>
+       <th style="color: white">Destination Location</th>
+       <th style="color: white">CabType</th>
+     </tr>
+   </thead>
+   <tbody>
+     <tr ng-repeat="d in client1">
+
+        <td >{{d.Custname}}</td>
+        <td>{{d.Custmobileno}}</td>
+        <td>{{d.PickupDate}}</td>
+        <td>{{d.Pickuplocation}}</td>
+        <td>{{d.Deastinationlocation}}</td>
+
+
+
+
+        <td>{{d.Cabetype}}</td>
+
+        <td>
+
+
+          <select class="form-control" ng-model=d1.driver required>
+            <option value="" disabled="true"> Select driver</option>
+            <option  ng-repeat="d1 in pushdata" ng-model="d1" ng-if="d.Cabetype==d1.Vehicletype"  value={{d1}}>{{d1.Name}}</option>
+
+          </select>
+
+
+
+        </td>
+        <td><button class="btn btn-info" ng-click="update(d,d1)"  style="border:solid;font-size:15px;" ng-disabled="myform.$invalid" >Save</td>
+     </tr>
+   </tbody>
+  </table>
+
+          </form>
+        </div>
+    </div>
+
+
+  </div>
+
+</div>
