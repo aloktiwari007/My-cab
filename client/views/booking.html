@@ -94,7 +94,7 @@
 							<small>WHEN</small>
 						</label>
 					<div class="col-sm-10 plain">
-						<select id="selWhen" class="form-control" ng-change="setTravelDate()" name="from1" ng-model="rec.selWhen" required>
+						<select id="selWhen" class="form-control" ng-change="setTravelDate()" name="from1" ng-model="rec.selWhen"  ng-click="checkd()" required>
 							<option value="" disabled selected>Select You ride time</option>
 							<option value="NOW">Now</option>
 							<option value="LATER">Later</option>
@@ -108,7 +108,7 @@
 				</div>
 
 
-				<div ng-show="rec.selWhen==='LATER'" class="form-group plain">
+				<div ng-show="rec.selWhen==='LATER'" class="form-group plain" >
 					<label for="TravelDate" class="col-sm-2 control-label plain">
 							<small>DEPART</small>
 						</label>

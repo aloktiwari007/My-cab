@@ -167,31 +167,18 @@ sessionStorage.setItem('dlnumber',$scope.vnumber);
     $scope.vnumber1=sessionStorage.getItem('driver_id');
     $scope.driverbookingstatus="booked";
     console.log("data in vnumber1"+$scope.vnumber1);
-        // var dl=sessionStorage.getItem('dlnumber');
-        // if(dl!=null)
-        // {
-        //
-        // }
-        // else {
+
           console.log("enter in data");
           $http.get('/api/booking/'+$scope.vnumber1+'/'+$scope.driverbookingstatus).then(function(response)
           {
-            console.log(response.data._id);
-            $scope.data=response.data._id;
-            $scope.cname=response.data.Custname;
-            $scope.cmobile=response.data.Custmobileno;
-            $scope.pickup=response.data.Pickuplocation;
-            $scope.pickupdate=response.data.PickupDate;
-            $scope.destination=response.data.Deastinationlocation;
-            // $('#name').html($scope.name);
-            // $('#mobile').html($scope.cmobile1);
-            // $('#pickup').html($scope.pickuplocation1);
-            // $('#destination').html($scope.destination1);
+
+
+            $scope.d=response.data;
+
 
           });
 
-        //}
-        //if($scope.vnumber!=undefined)
+
 
 
 
@@ -201,13 +188,14 @@ sessionStorage.setItem('dlnumber',$scope.vnumber);
 
       $scope.update=function()
       {
-        console.log($scope.data);
-
+      //  console.log($scope.data);
+        $scope.data=$scope.d._id;
         //$scope.id=$scope.data._id;
         var updatebookingstatus={
           DriverBookingstatus:"unbooked"
         };
         $http.put('/api/booking/'+$scope.data,JSON.stringify(updatebookingstatus)).then(function(response){
+          console.log(response);
           data();
         })
       }

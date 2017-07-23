@@ -63,7 +63,7 @@
 
   <div class="col-md-6" >
 
-    <table class="table-responsive table-striped ;label label-info" ng-if=cname>
+    <table class="table-responsive table-striped ;label label-info" ng-if="d">
 <thead>
 <tr>
 <th><center>Passenger Name</center></th>
@@ -77,19 +77,19 @@
 <tbody>
 <tr>
   <td>
-  <center>  <strong id="name" style="font-size:.5cm; "> {{cname}} </strong></center>
+  <center>  <strong id="name" style="font-size:.5cm; "> {{d.Custname}} </strong></center>
   </td>
   <td>
-    <center><strong id="mobile" style="font-size:.5cm; "> {{cmobile}} </strong></center>
+    <center><strong id="mobile" style="font-size:.5cm; "> {{d.Custmobileno}} </strong></center>
   </td>
   <td>
-    <center><strong id="pickup" style="font-size:.5cm; "> {{pickup}} </strong></center>
+    <center><strong id="pickup" style="font-size:.5cm; "> {{d.Pickuplocation}} </strong></center>
   </td>
   <td>
-    <center><strong id="pickup" style="font-size:.5cm; "> {{pickupdate}} </strong></center>
+    <center><strong id="pickup" style="font-size:.5cm; "> {{d.PickupDate}} </strong></center>
   </td>
   <td>
-    <center><strong id="destination" style="font-size:.5cm; "> {{destination}} </strong></center>
+    <center><strong id="destination" style="font-size:.5cm; "> {{d.Deastinationlocation}} </strong></center>
   </td>
   <td>
     <button type="button" name="button" class="btn btn-success" ng-click="update()"> End Ride</button>
@@ -98,7 +98,7 @@
 </table>
 
 
-<center><p style="margin:50px"><strong style="font-size:25px;  "  ng-if="!cname" class="label label-info">
+<center><p style="margin:50px"><strong style="font-size:25px;  "  ng-if="!d" class="label label-info">
   <b>
     <u>Cab Not Booked</u>
   </b>

@@ -131,6 +131,7 @@ $scope.lat;
           $scope.cabtype=$scope.rec.bookVehicleType
           $scope.bookSource=$scope.rec.bookSource;
           $scope.bookDestination=$scope.rec.bookDestination;
+          $scope.type=$scope.rec.bookVehicleType;
           console.log($scope.cabtype);
           $http.get('/api/singup/'+$scope.email).then(function(response)
 
@@ -154,20 +155,58 @@ $scope.lat;
       //---------------------------------------------------------------------------------------------------
       if($scope.dept=="LATER")
       {
+
+
+
         $http.get('/api/tariff/'+$scope.type).then(function(response)
         {
         //  console.log("tariff response "+$scope.rec.vehicletype);
+
+
+
+          var time=  $("#time").val();
+          var t=time.split(":");
+          var t1=t[0];
+          var t2=t[1];
+
+          var d=new Date();
+          d.setHours(t1,t2);
+
+          var t=response.data.Startpeakhour;
+          console.log(t);
+          var t1=t.split(" ")
+          var t2=t1[0].split(":");
+          var t3=t2[0];
+          var t4=t2[1];
+          var d1=new Date();
+           d1.setHours(t3,t4);
+
+           var v=response.data.Endpeakhour;
+           console.log(v);
+           var v1=v.split(" ")
+           var v2=v1[0].split(":");
+           var v3=v2[0];
+           var v4=v2[1];
+           var dv1=new Date();
+            dv1.setHours(v3,v4);
+        
+          if(d>=d1 && d<=dv1 )
+          {
+          $scope.rate=response.data.Peakrate;
+          }
+          else{
             $scope.rate=response.data.Normalrate;
-            var dist=$scope.distance;
-      $scope.rec.fare1=dist*$scope.rate;
+          }
 
-        var time=  $("#time").val();
-        var t=time.split(":");
-        var t1=t[0];
-        var t2=t[1];
 
-        var d=new Date();
-        d.setHours(t1,t2);
+
+
+
+
+          //  $scope.rate=response.data.Normalrate;
+            var dist=parseFloat($scope.distance.replace(/,/g,''));
+
+$scope.rec.fare1=dist*$scope.rate;
         var ptime=d.getHours()+":"+d.getMinutes();
 
         var date1= $("#demo").val();
@@ -282,14 +321,70 @@ $scope.rec.pickupdatedate=dateTime;
 $scope.rec.driverbookingstatus="booked";
 $scope.driverbookingstatus=$scope.rec.driverbookingstatus;
 $scope.type=$scope.rec.vehicletype;
-console.log("type is"+$scope.rec.bookVehicleType);
+console.log("type is"+$scope.type);
+
 if($scope.type==$scope.rec.bookVehicleType)
 {
+
+
+
+
+
+
+
     $http.get('/api/tariff/'+$scope.type).then(function(response)
     {
-    //  console.log("tariff response "+$scope.rec.vehicletype);
+      var today = new Date();
+      var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+      var time = today.getHours() + ":" + today.getMinutes() ;
+      var f=today.getHours();
+      var f1=today.getMinutes();
+      var newdate=new Date(today.getFullYear(),(today.getMonth()+1),today.getDate(),today.getHours(),today.getMinutes());
+      console.log(newdate);
+      var dateTime = date+' '+time;
+      //var startp=response.data.Startpeakhour;
+
+      today.setHours(f,f1);
+
+      var t=response.data.Startpeakhour;
+      console.log(t);
+      var t1=t.split(" ")
+      var t2=t1[0].split(":");
+      var t3=t2[0];
+      var t4=t2[1];
+      var d1=new Date();
+       d1.setHours(t3,t4);
+
+       var v=response.data.Endpeakhour;
+       console.log(v);
+       var v1=v.split(" ")
+       var v2=v1[0].split(":");
+       var v3=v2[0];
+       var v4=v2[1];
+       var dv1=new Date();
+        dv1.setHours(v3,v4);
+
+      console.log("the data is"+t2[0]);
+      console.log("the data is"+t2[1]);
+      console.log("the data is"+f);
+
+      console.log("the data is"+f1);
+      console.log("the data is"+v3);
+      console.log("the data is"+v4);
+      if(today>=d1 && today<=dv1 )
+      {
+      $scope.rate=response.data.Peakrate;
+      }
+      else{
         $scope.rate=response.data.Normalrate;
-        var f=parseFloat($scope.distance)
+      }
+
+
+
+    //  console.log("tariff response "+$scope.rec.vehicletype);
+      //  $scope.rate=response.data.Normalrate;
+       var f=parseFloat($scope.distance)
+
 $scope.rec.fare=f*$scope.rate;
 
         console.log("data from tariff1111111 database"+$scope.rate);
@@ -396,19 +491,7 @@ var directionsService = new google.maps.DirectionsService();
 
 
 
-              // navigator.geolocation.getCurrentPosition(function(position) {
-              //   console.log("enter ion current");
-              //   var pos = {
-              //     lat: position.coords.latitude,
-              //     lng: position.coords.longitude,
-              //
-              //   };
-              //   $scope.d_lat=pos.lat;
-              //   $scope.d_lng=pos.lng;
-              //   console.log(pos.lat);
-              // });
 
-            //  console.log($scope.d_lng);
 
               console.log("value of lat"+$scope.lat);
 
@@ -497,7 +580,9 @@ geocoder = new google.maps.Geocoder();
         title: 'cab here',
         icon:cab_icon
       });
+      map.setZoom(16);
       map.setCenter(marker.getPosition());
+
 
 
             //  socket1.emit('news', { my :"hello" });
@@ -524,56 +609,6 @@ geocoder = new google.maps.Geocoder();
                   {
 
 
-
-                    geocoder = new google.maps.Geocoder();
-                       if (geocoder) {
-                           geocoder.geocode({
-                               'address':address
-                           }, function (results, status) {
-                               if (status == google.maps.GeocoderStatus.OK) {
-                                   //callback(results[0]);
-                                  var dlat=results[0].geometry.location.lat();
-                                  var dlang=results[0].geometry.location.lng();
-                                  console.log(dlat);
-                                  console.log(dlang);
-                                  var lat=$scope.lat;
-                                  var lng=$scope.lng;
-
-
-
-                                  function distance1(lat1, lon1, lat2, lon2, unit) {
-                                          var radlat1 = Math.PI * lat1/180
-                                          var radlat2 = Math.PI * lat2/180
-                                          var radlon1 = Math.PI * lon1/180
-                                          var radlon2 = Math.PI * lon2/180
-                                          var theta = lon1-lon2
-                                          var radtheta = Math.PI * theta/180
-                                          var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-                                          dist = Math.acos(dist)
-                                          dist = dist * 180/Math.PI
-                                          dist = dist * 60 * 1.1515
-                                          if (unit=="K") { dist = dist * 1.609344 }
-                                          if (unit=="N") { dist = dist * 0.8684 }
-                                          return dist
-                                  }
-
-
-                                  var distance2 = distance1(lat, lng, dlat,dlang, 'K');
-                                  //  console.log(distance2);
-                                  var dit=parseFloat(Math.round(distance2*1000)/1000);
-                                  console.log(dit);
-                                  if(dit==NaN || dit>1.0)
-                                  {
-                                      alert("no cab avaliable in location");
-                                      location.reload();
-
-                                  }
-
-
-                               }
-
-                           });
-                         }
 
 
 
@@ -633,26 +668,76 @@ else{
 }
 
               }); //end click event
-var getlocation=function(){
-  var a23;
-              if (navigator.geolocation) {
-
-                      navigator.geolocation.getCurrentPosition(showPosition);
-
-                  }
-
-                  function showPosition(position) {
-            $scope.k= position.coords.latitude ;
-
-            $scope.ln=position.coords.longitude;
-              console.log($scope.k);
-            }
-            ;
-
-            }
-            getlocation();
 
 
 
+
+
+$scope.checkd  =function()
+{
+var address = document.getElementById('txtFrom').value;
+  var bookDestination = document.getElementById('txtTo').value;
+                  var dept=$scope.rec.selWhen;
+                  console.log("this data is "+dept);
+                  if(dept=="NOW"){
+
+                      geocoder = new google.maps.Geocoder();
+                         if (geocoder) {
+                             geocoder.geocode({
+                                 'address':address
+                             }, function (results, status) {
+                                 if (status == google.maps.GeocoderStatus.OK) {
+                                     //callback(results[0]);
+                                    var dlat=results[0].geometry.location.lat();
+                                    var dlang=results[0].geometry.location.lng();
+                                    console.log(dlat);
+                                    console.log(dlang);
+                                    var lat=$scope.lat;
+                                    var lng=$scope.lng;
+
+
+
+                                    function distance1(lat1, lon1, lat2, lon2, unit) {
+                                            var radlat1 = Math.PI * lat1/180
+                                            var radlat2 = Math.PI * lat2/180
+                                            var radlon1 = Math.PI * lon1/180
+                                            var radlon2 = Math.PI * lon2/180
+                                            var theta = lon1-lon2
+                                            var radtheta = Math.PI * theta/180
+                                            var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+                                            dist = Math.acos(dist)
+                                            dist = dist * 180/Math.PI
+                                            dist = dist * 60 * 1.1515
+                                            if (unit=="K") { dist = dist * 1.609344 }
+                                            if (unit=="N") { dist = dist * 0.8684 }
+                                            return dist
+                                    }
+
+
+                                    var distance2 = distance1(lat, lng, dlat,dlang, 'K');
+                                    //  console.log(distance2);
+                                    var dit=parseFloat(Math.round(distance2*1000)/1000);
+                                    console.log(dit);
+                                    if(isNaN(dit) || dit>1.0)
+                                    {
+                                        alert("no cab avaliable in location");
+                                      //  location.reload();
+
+                                    }
+
+
+                                 }
+
+                             });
+                           }
+                           else {
+                            //    alert('fffff');
+                           }
+
+
+}
+
+
+}
 
 });

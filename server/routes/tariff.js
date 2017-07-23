@@ -99,14 +99,12 @@ router.delete('/tariff/:id', function (req, res) {
 
 
  router.get('/tariff/:vehicletype', function (req, res) {
-   console.log("REACHED GET DATA ON SERVER"+req.params.type);
-   tariff.findOne({Vehicletype:req.params.type},
-   function(err,docs)
-   {
+   console.log("REACHED GET DATA ON SERVER12345689"+req.params.vehicletype);
+   tariff.findOne({Cabtype:req.params.vehicletype},function(err,docs)   {
      if (err) console.log('Error at get ' + err);
      else
       res.json(docs);
-      console.log(docs);
+      console.log("hhhh"+docs);
    });
 
  });
