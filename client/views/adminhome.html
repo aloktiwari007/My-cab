@@ -12,7 +12,8 @@ padding: 10px;
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
-      <span style="font-size:23px"></b><center><u><i>Advance Booking Page</i></u><center></b></span>
+      <center><strong style="font-size:25px" class="label label-info"><b><u>Advance Booking Page</u></b></strong></center><br>
+<center><input type="text" placeholder="search" class="form-control" style="width:50%;font-size:2em" ng-model="data"/></center><br>
 
 <center><p style="margin:50px"><strong style="font-size:25px;  "  ng-if="client1.length==0" class="label label-info">
   <b>
@@ -27,7 +28,7 @@ padding: 10px;
 
           <form name="myform" >
 
-            <table class="table-striped;label label-info ">
+            <table class="table table-striped ;label label-info ">
    <thead>
      <tr>
        <th style="color: white">Customer Name</th>
@@ -39,7 +40,7 @@ padding: 10px;
      </tr>
    </thead>
    <tbody>
-     <tr ng-repeat="d in client1">
+     <tr ng-repeat="d in client1 |filter:data">
 
         <td >{{d.Custname}}</td>
         <td>{{d.Custmobileno}}</td>

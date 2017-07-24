@@ -10,6 +10,8 @@ var logout=function(){
     $rootScope.tariff=true;
     $rootScope.addcab=true;
     $rootScope.driverhome=true;
+    $rootScope.invoice=true;
+    $rootScope.custtariff=true;
 
     $rootScope.logout=true;
     $rootScope.adminhome=true;

@@ -86,6 +86,8 @@
   <center><button ng-click="tariffdetails();button=false" class="form-control; btn btn-success" style="margin-bottom:12%;font-size:.5cm" ng-disabled="myform.$invalid">Save New Data</button></center>
 
 </form>
+
+<center><input type="text" placeholder="search" class="form-control" style="width:50%;font-size:2em" ng-model="data"/></center><br>
 <form name="myform1">
 
 
@@ -98,7 +100,7 @@
     <th>End Peak Time</th>
 
   </tr>
-  <tr ng-repeat="c in tariffdata">
+  <tr ng-repeat="c in tariffdata | filter:data">
 
 
     <td ><input type="text" value="{{c.Cabtype}}" ng-model="c.Cabtype" ng-disabled="button" name="cabtype" class="form-control" style="border:none" required/></td>
@@ -118,7 +120,7 @@
     <td><button class="btn btn-info" ng-click="deletetariff(c)" ><span class="glyphicon glyphicon-trash"></span></td>
   </tr>
 </table>
-  
+
 </form>
   </div>
 </div>

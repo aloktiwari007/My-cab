@@ -68,6 +68,7 @@
         <div class="col-lg-1"></div>
         <div class="col-lg-5">
           <center><strong style="font-size:25px" class="label label-info"><b><u>Driver and Cab Details</u></b></strong></center><br><br>
+          <center><input type="text" placeholder="search" class="form-control" style="width:50%;font-size:2em" ng-model="data"/></center><br>
           <form name="myform1" ng-submit="submitForm(myform1.$valid)" novalidate>
 
 
@@ -83,7 +84,7 @@
    </tr>
  </thead>
  <tbody>
-   <tr  ng-repeat="d in driverdata">
+   <tr  ng-repeat="d in driverdata |filter:data">
 
       <td ><input type="text" name="name" value="{{d.Name}}" ng-model="d.Name" ng-disabled="button" class="form-control" style="border:none" required/>
 

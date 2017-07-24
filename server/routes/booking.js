@@ -69,6 +69,18 @@ router.get('/booking/:demail/:driverbookingstatus', function (req, res) {
   });
 });
 
+router.get('/booking2/:cemail/:driverbookingstatus', function (req, res) {
+  //console.log("REACHED GET DATA ON SERVER");
+  console.log("demail booking call");
+  booking.find({CustEmail:req.params.cemail ,DriverBookingstatus:req.params.driverbookingstatus},function (err, docs) {
+    if (err) console.log('Error at get ' + err);
+    else
+     res.json(docs);
+      console.log("retrive data "+docs);
+  });
+});
+
+
 router.get('/booking1/:id/', function (req, res) {
   console.log("REACHED GET DATA ON SERVER123456");
   console.log(req.params.id);

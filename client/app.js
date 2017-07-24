@@ -77,6 +77,19 @@ $routeProvider
         templateUrl:'views/driverprofile.html',
         controller:'DriverprofileController'
 
+  })
+
+  .when('/custtariff',{
+        templateUrl:'views/custtariff.html',
+        controller:'CustTariffController'
+
+  })
+
+
+  .when('/invoice',{
+        templateUrl:'views/invoice.html',
+        controller:'InvoiceController'
+
   });
 
 
@@ -106,11 +119,13 @@ app.run(function($rootScope,$cookies,$http,$sessionStorage,$location){
       $rootScope.login=true;
        $rootScope.profile=false;
        $rootScope.tariff=true;
+       $rootScope.custtariff=false;
       $rootScope.logout=false;
     //  $rootScope.login=true;
     $rootScope.addcab=true;
     $rootScope.driverhome=true;
       $rootScope.signup=true;
+      $rootScope.invoice=false;
 
       console.log("page refress");
       $rootScope.adminhome=true;
@@ -132,11 +147,13 @@ app.run(function($rootScope,$cookies,$http,$sessionStorage,$location){
       $rootScope.login=true;
        $rootScope.profile=true;
        $rootScope.tariff=true;
+       $rootScope.custtariff=true;
       $rootScope.logout=false;
       $rootScope.signup=true;
       $rootScope.adminhome=true;
       $rootScope.changepassword=false;
       $rootScope.usernav=false;
+      $rootScope.invoice=true;
       $rootScope.custname1=drivername;
     }
     else if(admin!=null)
@@ -149,11 +166,13 @@ app.run(function($rootScope,$cookies,$http,$sessionStorage,$location){
       $rootScope.login=true;
        $rootScope.profile=true;
        $rootScope.tariff=false;
+       $rootScope.custtariff=true;
       $rootScope.signup=true;
       $rootScope.adminhome=false;
       $rootScope.changepassword=false;
       $rootScope.driverprofile=true;
       $rootScope.usernav=false;
+      $rootScope.invoice=true;
       $rootScope.custname1=adminname;
     }
 
@@ -164,8 +183,10 @@ app.run(function($rootScope,$cookies,$http,$sessionStorage,$location){
         $rootScope.booking=true;
         $rootScope.profile=true;
         $rootScope.tariff=true;
+        $rootScope.custtariff=true;
         $rootScope.addcab=true;
         $rootScope.driverhome=true;
+        $rootScope.invoice=true;
         $rootScope.logout=true;
         $rootScope.adminhome=true;
         $rootScope.changepassword=true;

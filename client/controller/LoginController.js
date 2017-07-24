@@ -16,13 +16,16 @@ $scope.login=function(){
                       $location.path('/booking');
 
                       $rootScope.booking=false;
+                      $rootScope.invoice=false;
                       $rootScope.login=true;
                        $rootScope.profile=false;
                        $rootScope.tariff=true;
+                       $rootScope.custtariff=false;
                       $rootScope.logout=false;
                     //  $rootScope.login=true;
                     $rootScope.addcab=true;
                     $rootScope.driverhome=true;
+
                       $rootScope.signup=true;
 
                       console.log("page refress");
@@ -43,7 +46,7 @@ $scope.login=function(){
                     sessionStorage.setItem('driver_id',response.data.udata.Email);
                       sessionStorage.setItem('driver_name',response.data.udata.Name);
 
-
+                        $rootScope.invoice=true;
                     $rootScope.driverhome=false;
                     $rootScope.logout=false;
                     $rootScope.addcab=true;
@@ -53,6 +56,7 @@ $scope.login=function(){
                      $rootScope.tariff=true;
                     $rootScope.logout=false;
                     $rootScope.signup=true;
+                    $rootScope.custtariff=true;
                 $rootScope.adminhome=true;
                 $rootScope.changepassword=false;
                 $rootScope.driverprofile=false;
@@ -73,12 +77,14 @@ $scope.login=function(){
 
 
                     console.log("welocme admin");
+                    $rootScope.invoice=true;
                     $rootScope.driverhome=true;
                     $rootScope.logout=false;
                     $rootScope.addcab=false;
                     $rootScope.booking=true;
                     $rootScope.login=true;
                      $rootScope.profile=true;
+                     $rootScope.custtariff=true;
                      $rootScope.tariff=false;
                     $rootScope.signup=true;
                     $rootScope.adminhome=false;
