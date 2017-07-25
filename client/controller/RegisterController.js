@@ -1,4 +1,4 @@
-angular.module('Cabbooking').controller('RegisterController',function($scope,$http){
+angular.module('Cabbooking').controller('RegisterController',function($scope,$http,$location){
 
 $scope.register=function(){
   var pass=$scope.data.password;
@@ -12,7 +12,7 @@ $scope.register=function(){
     if(response.data.success==true)
     {
     alert('registered');
-    location.reload();
+    $location.path('/driverhome');
     }
     else {
       alert("email id already exist");

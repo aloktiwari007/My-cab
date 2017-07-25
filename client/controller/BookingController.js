@@ -189,7 +189,7 @@ $scope.lat;
            var v4=v2[1];
            var dv1=new Date();
             dv1.setHours(v3,v4);
-        
+
           if(d>=d1 && d<=dv1 )
           {
           $scope.rate=response.data.Peakrate;
@@ -260,7 +260,7 @@ $scope.rec.fare1=dist*$scope.rate;
       }
       else if(diffDays==0){
 
-        alert("You can not book your cab for today");
+        alert("You can not book your cab for today ");
       }
       else{
 
@@ -298,7 +298,7 @@ else{
         $http.get('/api/driver/'+$scope.demail).then(function(response)
       {
         if(response.data==undefined && $scope.dept!="LATER"){
-            alert('no driver');
+            alert('No cab avaliable');
         }
         else{
 
@@ -438,7 +438,7 @@ else{
 
    }
    else {
-     alert('no cab ');
+     alert('Selected Cab type not avaliable ');
    }
 
  }
@@ -448,7 +448,7 @@ else{
  });
 }
 else {
-        alert("no cab avaliable");
+        alert("Selected Cab type not avaliable ");
       }
 
 

@@ -8,7 +8,7 @@ console.log("driver id"+$scope.demail);
   var map, infoWindow;
     $scope.initMap =  function () {
           map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: -34.397, lng: 150.644},
+            center: {lat: 28.61, lng: 77.23},
             zoom: 6
           });
           infoWindow = new google.maps.InfoWindow;
@@ -189,6 +189,10 @@ sessionStorage.setItem('dlnumber',$scope.vnumber);
       $scope.update=function()
       {
       //  console.log($scope.data);
+      var r = confirm("Do You really want to End your ride ?");
+
+      if(r==true)
+      {
         $scope.data=$scope.d._id;
         //$scope.id=$scope.data._id;
         var updatebookingstatus={
@@ -199,6 +203,7 @@ sessionStorage.setItem('dlnumber',$scope.vnumber);
           data();
         })
       }
+    }
 
 
 }])
